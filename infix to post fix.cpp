@@ -1,9 +1,10 @@
 #include<iostream>
 #include<string.h>
 #include<ctype.h>
+#include<algorithm>
 using namespace std;
 
-#define STACKSIZE 10
+#define STACKSIZE 40
 class stack
 {
 	int top;
@@ -61,12 +62,12 @@ class stack
 int main()
 {
 	stack s;
-	char result[10]="";
-	char infix[10], postfix[10];
+	char result[STACKSIZE]="";
+	char infix[STACKSIZE], postfix[STACKSIZE];
 	int j=0,z=0;
 	//a-b*c
 	cout<<"enter an expression\n";
-	cin.getline(infix,10);
+	cin.getline(infix,STACKSIZE);
 	for(int i=0; i< strlen(infix);i++)
 	{
 		if(isdigit(infix[i]) || isalpha(infix[i]))
@@ -105,16 +106,17 @@ int main()
 				z++;
 				s.POP();
 			}while(s.Peek()!='(');
-			s.POP();
+		s.POP();
 		}
 		else 
 			s.PUSH(infix[i]);
 	}
 	do
 	{
-	result[z]=s.Peek();
-				z++;
-				s.POP();
+		if(s.Peek() != '(')
+		result[z]=s.Peek();
+					z++;
+					s.POP();
 	}while(!s.isEmpty());
 	cout<<result;
 	/*

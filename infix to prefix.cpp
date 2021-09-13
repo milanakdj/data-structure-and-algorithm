@@ -4,7 +4,7 @@
 #include<algorithm>
 using namespace std;
 
-#define STACKSIZE 10
+#define STACKSIZE 50
 class stack
 {
 	int top;
@@ -72,12 +72,12 @@ void reverse(char str[])
 int main()
 {
 	stack s;
-	char result[10]="";
-	char infix[10], postfix[10];
+	char result[STACKSIZE]="";
+	char infix[STACKSIZE], postfix[STACKSIZE];
 	int j=0,z=0;
 	//a-b*c
 	cout<<"enter an expression\n";
-	cin.getline(infix,10);
+	cin.getline(infix,STACKSIZE);
 	reverse(infix);
 	for(int i=0; i< strlen(infix);i++)
 	{
@@ -133,10 +133,5 @@ int main()
 
 	cout<<result;
 	
-	for(int i=0;i<strlen(result);i++)
-	{
-		cout<<endl;
-		cout<<result[i]<<endl;
-	}
 	return 0;
 }

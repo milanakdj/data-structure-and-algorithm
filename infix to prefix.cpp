@@ -79,6 +79,7 @@ int main()
 	cout<<"enter an expression\n";
 	cin.getline(infix,STACKSIZE);
 	reverse(infix);
+	cout<<infix<<endl;
 	for(int i=0; i< strlen(infix);i++)
 	{
 		if(isdigit(infix[i]) || isalpha(infix[i]))
@@ -86,7 +87,7 @@ int main()
 				result[z]=infix[i];
 				z++;
 			}
-		else if(infix[i]=='(')
+		else if(infix[i]==')')
 			s.PUSH(infix[i]);
 		else if(infix[i]=='$')
 		{
@@ -106,14 +107,14 @@ int main()
 				s.PUSH(infix[i]);
 			
 		}
-		else if(infix[i]==')')
+		else if(infix[i]=='(')
 		{
 			do 
 			{
 				result[z]=s.Peek();
 				z++;
 				s.POP();
-			}while(s.Peek()!='(');
+			}while(s.Peek()!=')');
 			s.POP();
 		}
 		else 

@@ -50,9 +50,9 @@ class stack
 			return mystack[top];
 			
 		}
-		int hashigherorsameprecedence(char op)
+		int hashigherprecedence(char op)
 		{
-			if((op==mystack[top]) || ((op=='+' || op=='-') && (mystack[top] == '*' || mystack[top]=='/')) || (op=='*' && mystack[top]=='/')|| ((op=='*' ||op=='/' ||op=='+' ||op=='-' ) && mystack[top]=='$') ||  (op=='/' && mystack[top]=='*')|| (op=='+' && mystack[top]=='-')|| (op=='-' && mystack[top]=='+')  )
+			if(((op=='+' || op=='-') && (mystack[top] == '*' || mystack[top]=='/')) ||  ((op=='*' ||op=='/' ||op=='+' ||op=='-' ) && mystack[top]=='$')  )
 				return 1;
 			else 
 				return 0;
@@ -90,15 +90,12 @@ int main()
 			s.PUSH(infix[i]);
 		else if(infix[i]=='$')
 		{
-			if(s.Peek()=='$')
-				s.PUSH(infix[i]);
-			else
-				goto label;
+			
 		}
 		else if(infix[i]=='*'||infix[i]=='/'||infix[i]=='-'||infix[i]=='+')
 		{
 			label:
-			if(!s.isEmpty() && s.hashigherorsameprecedence(infix[i]))
+			if(!s.isEmpty() && s.hashigherprecedence(infix[i]))
 			{
 				result[z]=s.Peek();
 				z++;

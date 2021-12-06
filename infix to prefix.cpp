@@ -4,7 +4,7 @@
 #include<algorithm>
 using namespace std;
 
-#define STACKSIZE 50
+#define STACKSIZE 70
 class stack
 {
 	int top;
@@ -50,9 +50,9 @@ class stack
 			return mystack[top];
 			
 		}
-		int hashigherprecedence(char op)
+		int hashigherorsameprecedence(char op)
 		{
-			if(((op=='+' || op=='-') && (mystack[top] == '*' || mystack[top]=='/')) ||  ((op=='*' ||op=='/' ||op=='+' ||op=='-' ) && mystack[top]=='$')  )
+			if( ((op=='+' || op=='-') && (mystack[top] == '*' || mystack[top]=='/')) || ((op=='*' ||op=='/' ||op=='+' ||op=='-' ) && mystack[top]=='$')   )
 				return 1;
 			else 
 				return 0;
@@ -79,7 +79,6 @@ int main()
 	cout<<"enter an expression\n";
 	cin.getline(infix,STACKSIZE);
 	reverse(infix);
-	cout<<infix<<endl;
 	for(int i=0; i< strlen(infix);i++)
 	{
 		if(isdigit(infix[i]) || isalpha(infix[i]))
@@ -91,17 +90,20 @@ int main()
 			s.PUSH(infix[i]);
 		else if(infix[i]=='$')
 		{
-			
+			if(s.Peek()=='$')
+				s.PUSH(infix[i]);
+			else
+				goto label;
 		}
 		else if(infix[i]=='*'||infix[i]=='/'||infix[i]=='-'||infix[i]=='+')
 		{
 			label:
-			if(!s.isEmpty() && s.hashigherprecedence(infix[i]))
+			if(!s.isEmpty() && s.hashigherorsameprecedence(infix[i]))
 			{
 				result[z]=s.Peek();
 				z++;
 				s.POP();
-				s.PUSH(infix[i]);
+				goto label;
 			}
 			else
 				s.PUSH(infix[i]);

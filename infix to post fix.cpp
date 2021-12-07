@@ -92,7 +92,7 @@ int main()
 				result[z]=s.Peek();
 				z++;
 				s.POP();
-				s.PUSH(infix[i]);
+				goto label;
 			}
 			else
 				s.PUSH(infix[i]);
